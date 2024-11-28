@@ -25,5 +25,5 @@ public partial class Paquete
 
     public virtual Municipio IdMunicipioNavigation { get; set; } = null!;
 
-    public virtual ICollection<Programacion> Programaciones { get; set; } = new List<Programacion>();
+    public virtual ICollection<Programacion> Programacions { get; set; } = new List<Programacion>();
 }

@@ -22,7 +22,7 @@ namespace ApiRest.Controllers
 
         // GET: api/Actividad
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Actividad>>> GetActividad()
+        public async Task<ActionResult<IEnumerable<Actividad>>> GetActividades()
         {
             return await _context.Actividad.ToListAsync();
         }

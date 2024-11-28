@@ -49,19 +49,15 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<Servicio> Servicio { get; set; }
 
-    public virtual DbSet<Usuario> Usuario { get; set; }
+    public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
 
     }
-        
-        
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.UseCollation("Latin1_General_CI_AS");
-
         modelBuilder.Entity<Actividad>(entity =>
         {
             entity.HasKey(e => e.IdActividad).HasName("PK_idActividad");
@@ -147,7 +143,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.Property(e => e.IdDepartamento).HasColumnName("idDepartamento");
             entity.Property(e => e.CodigoDepartamento).HasColumnName("codigoDepartamento");
-            entity.Property(e => e.IdPais).HasColumnName("idPaiss");
+            entity.Property(e => e.IdPais).HasColumnName("idPais");
             entity.Property(e => e.NombreDepartamento)
                 .HasMaxLength(60)
                 .IsUnicode(false)
@@ -155,7 +151,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.IdPaisNavigation).WithMany(p => p.Departamentos)
                 .HasForeignKey(d => d.IdPais)
-                .HasConstraintName("FK_idPaiss");
+                .HasConstraintName("FK_idPais");
         });
 
         modelBuilder.Entity<DetallePaqueteServicio>(entity =>
@@ -253,20 +249,20 @@ public partial class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Pais>(entity =>
         {
-            entity.HasKey(e => e.IdPais).HasName("PK_idPaiss");
+            entity.HasKey(e => e.IdPais).HasName("PK_idPais");
 
             entity.ToTable("pais");
 
-            entity.HasIndex(e => e.CodigoPais, "UC_codigoPaiss").IsUnique();
+            entity.HasIndex(e => e.CodigoPais, "UC_codigoPais").IsUnique();
 
-            entity.HasIndex(e => e.NombrePais, "UC_nombrePaiss").IsUnique();
+            entity.HasIndex(e => e.NombrePais, "UC_nombrePais").IsUnique();
 
-            entity.Property(e => e.IdPais).HasColumnName("idPaiss");
-            entity.Property(e => e.CodigoPais).HasColumnName("codigoPaiss");
+            entity.Property(e => e.IdPais).HasColumnName("idPais");
+            entity.Property(e => e.CodigoPais).HasColumnName("codigoPais");
             entity.Property(e => e.NombrePais)
                 .HasMaxLength(60)
                 .IsUnicode(false)
-                .HasColumnName("nombrePaiss");
+                .HasColumnName("nombrePais");
         });
 
         modelBuilder.Entity<Paquete>(entity =>
@@ -354,7 +350,7 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.HoraInicioRecogida).HasColumnName("horaInicioRecogida");
             entity.Property(e => e.IdPaquete).HasColumnName("idPaquete");
 
-            entity.HasOne(d => d.IdPaqueteNavigation).WithMany(p => p.Programaciones)
+            entity.HasOne(d => d.IdPaqueteNavigation).WithMany(p => p.Programacions)
                 .HasForeignKey(d => d.IdPaquete)
                 .HasConstraintName("FK_idPaquete");
         });
